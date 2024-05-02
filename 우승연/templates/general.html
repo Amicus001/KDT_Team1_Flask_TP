@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일반쓰레기 - 재활용 쓰레기 이진분류기</title>
+    <link href = "{{url_for('static', filename = 'mystyle.css')}}" rel="stylesheet"> 
+</head>
+<body>
+    <center>
+        <h1> 🌱일반쓰레기 - 재활용 쓰레기 분류기🌱</h1><hr>
+
+        {% if image_url %}
+            <img src="{{ image_url }}" alt="제출된 이미지" width="224" height="224">
+        {% endif %}
+
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <input type="file" id="trashimage" name="file"><br>
+            <input type="submit" value =" " class="submit-button">  
+        </form>
+
+        {% if result == 0 %}
+            <hr>
+            <h2>이것은 일반쓰레기입니다! 종량제 봉투를 사용하세요.</h2>
+        {% elif result == 1 %}
+            <hr>
+            <h2>이것은 재활용 쓰레기입니다! 재활용 쓰레기 분류기를 이용해주세요.</h2>
+        {% else %}
+            <hr>
+            <h2>쓰레기가 잘 보이도록 복잡하지 않은 배경에서 찍은 사진을 제출해 주세요!</h2>
+        {% endif %}
+    </center>
+</body>
+</html>
